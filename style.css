@@ -1,0 +1,14 @@
+@font-face {
+  font-family: Karla;
+  src: url("Karla-VariableFont_wght.ttf");
+}
+
+* {
+  font-family: "Karla";
+}
+
+.no-bullet-point-list-item {
+  list-style-type: none; /* Removes bullets/numbers */
+  padding: 0; /* Removes default left padding */
+  margin: 0; /* Removes default margin */
+}
