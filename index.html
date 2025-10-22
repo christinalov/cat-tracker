@@ -10,7 +10,7 @@
     <main>
       <p id="currentDate"></p>
       <section>
-        <ul>
+        <ul class="no-bullet-point-list-item">
           <li>
             <label for="litterbox-room-date">
               Deep Clean Litterbox (Room)
@@ -24,18 +24,16 @@
             <input type="date" id="litterbox-kitchen-date" />
           </li>
         </ul>
-        <ul class="no-bullet-point-list-item">
-          <li>
-            <input type="checkbox" id="deep-clean-water-fountain" />
-            <label for="deep-clean-water-fountain">
-              Deep Clean Water Fountain
-            </label>
-          </li>
-          <li>
-            <input type="checkbox" id="trim-nails" />
-            <label for="trim-nails"> Trim Nails</label>
-          </li>
-        </ul>
+        <li>
+          <label for="deep-clean-water-fountain">
+            Deep Clean Water Fountain
+          </label>
+          <input type="date" id="deep-clean-water-fountain" />
+        </li>
+        <li>
+          <label for="trim-nails"> Trim Nails</label>
+          <input type="date" id="trim-nails" />
+        </li>
       </section>
     </main>
     <script src="script.js"></script>

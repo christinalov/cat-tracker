@@ -11,7 +11,7 @@ const dayNames = [
 ];
 
 const currentDayObj = new Date();
-const currentMonth = currentDayObj.getMonth() + 1;
+const currentMonth = currentDayObj.getMonth() + 1; // 0-indexed
 const currentDate = currentDayObj.getDate();
 const currentYear = currentDayObj.getFullYear();
 const currentDay = dayNames[currentDayObj.getDay()];
@@ -20,14 +20,26 @@ const currentDateMsg = `Today is ${currentMonth}/${currentDate}/${currentYear} (
 const dateHeading = document.querySelector("#currentDate");
 dateHeading.textContent = currentDateMsg;
 
-const litterBoxRoomDateObj = document.querySelector("#litterbox1-date");
-const litterBoxKitchenDateObj = document.querySelector("#litterbox2-date");
+const litterBoxRoomDateObj = document.querySelector("#litterbox-room-date");
+const litterBoxKitchenDateObj = document.querySelector(
+  "#litterbox-kitchen-date"
+);
 
-const onLitterBoxDateChange = function (litterBoxRoom) {
-  const selectedDate = litterBoxRoom
-    ? litterBoxRoomDateObj.value
-    : litterBoxKitchenDateObj.value;
-  localStorage.setItem("litterBoxCleanDate", selectedDate);
+const onLitterBoxRoomDateLoad = function () {
+  const savedDate = localStorage.getItem("litterbox-room-date");
+  console.log(savedDate);
+  if (savedDate) {
+    litterBoxRoomDateObj.textContent = savedDate;
+  }
 };
 
-litterBoxRoomDateObj.addEventListener("change", onLitterBoxDateChange);
+litterBoxRoomDateObj.addEventListener("load", onLitterBoxRoomDateLoad);
+
+const onLitterBoxRoomDateChange = function (event) {
+  const elementId = event.target.id;
+  const selectedDate = litterBoxRoomDateObj.value;
+  console.log(elementId);
+  localStorage.setItem(elementId, selectedDate);
+};
+
+litterBoxRoomDateObj.addEventListener("change", onLitterBoxRoomDateChange);
