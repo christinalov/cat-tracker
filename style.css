@@ -12,3 +12,13 @@
   padding: 0; /* Removes default left padding */
   margin: 0; /* Removes default margin */
 }
+
+#currentDate {
+  font-size: 36px;
+  text-align: center;
+  color: #333;
+}
+
+div {
+  color: #333;
+}

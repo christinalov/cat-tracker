@@ -24,22 +24,39 @@ const litterBoxRoomDateObj = document.querySelector("#litterbox-room-date");
 const litterBoxKitchenDateObj = document.querySelector(
   "#litterbox-kitchen-date"
 );
+const deepCleanWaterFountainObj = document.querySelector(
+  "#deep-clean-water-fountain"
+);
+const trimNailsObj = document.querySelector("#trim-nails");
+const weightDateObj = document.querySelector("#weight-date");
+const weightNumberObj = document.querySelector("#weight-number");
 
-const onLitterBoxRoomDateLoad = function () {
-  const savedDate = localStorage.getItem("litterbox-room-date");
-  console.log(savedDate);
-  if (savedDate) {
-    litterBoxRoomDateObj.textContent = savedDate;
+const inputDateStringIdToObj = {
+  "weight-date": weightDateObj,
+  "weight-number": weightNumberObj,
+  "litterbox-room-date": litterBoxRoomDateObj,
+  "litterbox-kitchen-date": litterBoxKitchenDateObj,
+  "deep-clean-water-fountain": deepCleanWaterFountainObj,
+  "trim-nails": trimNailsObj,
+};
+
+const onDOMLoad = function () {
+  for (const id in inputDateStringIdToObj) {
+    const savedDate = localStorage.getItem(id);
+    if (savedDate) {
+      inputDateStringIdToObj[id].value = savedDate;
+    }
   }
 };
 
-litterBoxRoomDateObj.addEventListener("load", onLitterBoxRoomDateLoad);
+document.addEventListener("DOMContentLoaded", onDOMLoad);
 
-const onLitterBoxRoomDateChange = function (event) {
+const onDateChange = function (event) {
   const elementId = event.target.id;
-  const selectedDate = litterBoxRoomDateObj.value;
-  console.log(elementId);
+  const selectedDate = inputDateStringIdToObj[elementId].value;
   localStorage.setItem(elementId, selectedDate);
 };
 
-litterBoxRoomDateObj.addEventListener("change", onLitterBoxRoomDateChange);
+for (const id in inputDateStringIdToObj) {
+  inputDateStringIdToObj[id].addEventListener("change", onDateChange);
+}
