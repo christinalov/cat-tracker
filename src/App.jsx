@@ -22,7 +22,7 @@ function App() {
     waterFountain: "",
     trimNails: "",
     brushTeeth: "",
-    weightNumber: "",
+    weightNumber: "9.3",
     weightDate: "",
   });
 
@@ -56,7 +56,7 @@ function App() {
             type="date"
             name="litterboxRoom"
             value={taskData.litterboxRoom}
-            onChange={handleChange}
+            onChange={onChange}
           />
         </li>
 
@@ -66,7 +66,7 @@ function App() {
             type="date"
             name="litterboxKitchen"
             value={taskData.litterboxKitchen}
-            onChange={handleChange}
+            onChange={onChange}
           />
         </li>
 
@@ -76,7 +76,7 @@ function App() {
             type="date"
             name="waterFountain"
             value={taskData.waterFountain}
-            onChange={handleChange}
+            onChange={onChange}
           />
         </li>
 
@@ -86,7 +86,7 @@ function App() {
             type="date"
             name="trimNails"
             value={taskData.trimNails}
-            onChange={handleChange}
+            onChange={onChange}
           />
         </li>
 
@@ -96,7 +96,7 @@ function App() {
             type="date"
             name="brushTeeth"
             value={taskData.brushTeeth}
-            onChange={handleChange}
+            onChange={onChange}
           />
         </li>
 
@@ -106,13 +106,13 @@ function App() {
             type="number"
             name="weightNumber"
             value={taskData.weightNumber}
-            onChange={handleChange}
+            onChange={onChange}
           />
           <input
             type="date"
             name="weightDate"
             value={taskData.weightDate}
-            onChange={handleChange}
+            onChange={onChange}
           />
         </li>
       </ul>

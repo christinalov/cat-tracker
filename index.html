@@ -1,48 +1,12 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="style.css" />
     <title>Cat Tracker ≽^•⩊•^≼</title>
   </head>
   <body>
-    <main>
-      <p id="currentDate"></p>
-      <section>
-        <div>
-          <ul class="no-bullet-point-list-item">
-            <li>
-              <label for="litterbox-room-date">
-                Deep Clean Litterbox (Room)
-              </label>
-              <input type="date" id="litterbox-room-date" />
-            </li>
-            <li>
-              <label for="litterbox-kitchen-date">
-                Deep Clean Litterbox (Kitchen)
-              </label>
-              <input type="date" id="litterbox-kitchen-date" />
-            </li>
-            <li>
-              <label for="deep-clean-water-fountain">
-                Deep Clean Water Fountain
-              </label>
-              <input type="date" id="deep-clean-water-fountain" />
-            </li>
-            <li>
-              <label for="trim-nails"> Trim Nails</label>
-              <input type="date" id="trim-nails" />
-            </li>
-            <li>
-              <label for="weight-data"> Weight (lbs) </label>
-              <input type="number" id="weight-number" />
-              <input type="date" id="weight-date" />
-            </li>
-          </ul>
-        </div>
-      </section>
-    </main>
-    <script src="script.js"></script>
+    <div id="root"></div>
+    <script type="module" src="/src/main.jsx"></script>
   </body>
 </html>
