@@ -1,4 +1,6 @@
 import { useState, useEffect } from "react";
+import "./components/TaskItem.jsx";
+import TaskItem from "./components/TaskItem.jsx";
 
 function App() {
   const [dateMsg] = useState(() => {
@@ -22,7 +24,7 @@ function App() {
     waterFountain: "",
     trimNails: "",
     brushTeeth: "",
-    weightNumber: "9.3",
+    weightNumber: "",
     weightDate: "",
   });
 
@@ -59,6 +61,14 @@ function App() {
             onChange={onChange}
           />
         </li>
+        <TaskItem
+          label="Deep Clean Litterbox Room"
+          name="litterboxRoom"
+          value={taskData.litterboxRoom}
+          onChange={onChange}
+          type="date"
+          numberNeeded={false}
+        />
 
         <li>
           <label>Deep Clean Litterbox (Kitchen)</label>
