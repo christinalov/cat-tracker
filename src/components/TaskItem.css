@@ -1,0 +1,15 @@
+.task-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 12px 0;
+  padding: 10px;
+  border-radius: 8px;
+  background-color: #fafafa;
+}
+
+.task-item input {
+  padding: 6px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+}

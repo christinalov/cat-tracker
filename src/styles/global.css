@@ -7,18 +7,29 @@
   font-family: "Karla";
 }
 
-.no-bullet-point-list-item {
-  list-style-type: none; /* Removes bullets/numbers */
-  padding: 0; /* Removes default left padding */
-  margin: 0; /* Removes default margin */
+body {
+  background-color: #f7f7f7;
+  margin: 0;
+  color: #333;
 }
 
-#currentDate {
-  font-size: 36px;
+main {
+  max-width: 600px;
+  margin: 40px auto;
+  background: white;
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+h1 {
   text-align: center;
-  color: #333;
 }
 
-div {
-  color: #333;
+ul {
+  padding: 0;
+}
+
+p {
+  text-align: center;
 }
