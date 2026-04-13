@@ -3,15 +3,28 @@ import "./TaskItem.css";
 const TaskItem = function ({
   label,
   name,
+  index,
   value,
   onChange,
   type,
   numberNeeded,
   numberName,
   numberValue,
+  onDragStart,
+  onDragEnter,
+  onDragOver,
+  onDrop,
 }) {
   return (
-    <li className="task-item">
+    <li
+      className="task-item"
+      draggable="true"
+      index={index}
+      onDragStart={onDragStart}
+      onDragEnter={onDragEnter}
+      onDragOver={onDragOver}
+      onDrop={onDrop}
+    >
       <label>{label}</label>
       {numberNeeded && (
         <input
