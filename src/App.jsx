@@ -1,15 +1,20 @@
 import { useState, useEffect, useRef } from "react";
 import TaskItem from "./components/TaskItem.jsx";
-import { tasks } from "./data/tasks.js";
+import { tasks as defaultTasks } from "./data/tasks.js";
 
 /**
  * need to do:
  * 1. hover over LI taskitem, tooltip displays how many days ago from today
- * 2. feature to add new taskitem
- * 3. rearrange order LI taskitems and have order persist
+ * 2. feature to add new taskitem AND to delete taskitem
+ * 3. done : rearrange order LI taskitems and have order persist
+ * 4. feature to remove all saved dates?
+ * 5. import dates to google calendar
+ * 6. combine taskList and taskdatedata into one single component?
+ * 7. add drag and drop threshold lines
  **/
 
-function App() {
+const App = function () {
+  const movingTaskItemSourceIndex = useRef(null);
   const [dateMsg] = useState(() => {
     const dayNames = [
       "Sunday",
@@ -25,9 +30,10 @@ function App() {
     return `Today is ${d.getMonth() + 1}/${d.getDate()}/${d.getFullYear()} (${dayNames[d.getDay()]}) !!`;
   });
 
-  const [tasksList] = useState(tasks);
-
-  const movingTaskItemSourceIndex = useRef(null);
+  const [tasksList, setTasksList] = useState(() => {
+    const savedOrder = localStorage.getItem("tasksOrderData");
+    return savedOrder ? JSON.parse(savedOrder) : defaultTasks;
+  });
 
   const [tasksData, setTasksData] = useState(() => {
     const savedData = localStorage.getItem("tasksDateData");
@@ -43,12 +49,22 @@ function App() {
     }));
   };
 
-  // keep track
-  const onDrop = () => {};
+  const onDrop = (targetIndex) => {
+    const sourceIndex = movingTaskItemSourceIndex.current;
+    const updatedTasks = [...tasksList];
+    const draggedTask = updatedTasks[sourceIndex];
+    updatedTasks.splice(sourceIndex, 1);
+    updatedTasks.splice(targetIndex, 0, draggedTask);
+    setTasksList(updatedTasks);
+  };
 
   useEffect(() => {
     localStorage.setItem("tasksDateData", JSON.stringify(tasksData));
   }, [tasksData]);
+
+  useEffect(() => {
+    localStorage.setItem("tasksOrderData", JSON.stringify(tasksList));
+  }, [tasksList]);
 
   return (
     <main>
@@ -67,13 +83,12 @@ function App() {
             numberName={task.numberName}
             numberValue={task.numberNeeded ? tasksData[task.numberName] : ""}
             onDragStart={() => (movingTaskItemSourceIndex.current = index)}
-            onDragOver={(e) => e.preventDefault()}
-            onDrop={onDrop}
+            onDrop={() => onDrop(index)}
           />
         ))}
       </ul>
     </main>
   );
-}
+};
 
 export default App;

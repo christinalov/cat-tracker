@@ -2,14 +2,40 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+  gap: 10px;
   margin: 12px 0;
   padding: 10px;
   border-radius: 8px;
   background-color: #fafafa;
+  transition: background 0.2s ease;
 }
 
 .task-item input {
   padding: 6px;
   border-radius: 6px;
   border: 1px solid #ccc;
+}
+
+.drag-handle {
+  cursor: grab;
+  padding: 0 8px;
+  font-size: 18px;
+  color: #888;
+  user-select: none;
+}
+
+.drag-handle:hover {
+  color: #333;
+}
+
+.drag-handle:active {
+  cursor: grabbing;
+}
+
+.task-item:hover {
+  background: #f5f5f5;
+}
+
+.task-item.dragging {
+  opacity: 0.8;
 }

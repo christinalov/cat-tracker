@@ -1,4 +1,5 @@
 import "./TaskItem.css";
+import { useRef } from "react";
 
 const TaskItem = function ({
   label,
@@ -11,21 +12,33 @@ const TaskItem = function ({
   numberName,
   numberValue,
   onDragStart,
-  onDragEnter,
-  onDragOver,
   onDrop,
 }) {
+  const liRef = useRef(null);
+
+  const handleDragImage = (e) => {
+    onDragStart();
+    e.dataTransfer.setDragImage(liRef.current, 20, 20);
+  };
+
   return (
     <li
+      ref={liRef}
       className="task-item"
-      draggable="true"
       index={index}
-      onDragStart={onDragStart}
-      onDragEnter={onDragEnter}
-      onDragOver={onDragOver}
+      onDragOver={(e) => e.preventDefault()}
       onDrop={onDrop}
     >
+      <span
+        className="drag-handle"
+        draggable={true}
+        onDragStart={handleDragImage}
+      >
+        ⋮⋮
+      </span>
+
       <label>{label}</label>
+
       {numberNeeded && (
         <input
           type="number"
