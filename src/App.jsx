@@ -1,5 +1,6 @@
 import { useState, useEffect, useRef } from "react";
 import TaskItem from "./components/TaskItem.jsx";
+import AddTaskItem from "./components/AddTaskItem.jsx";
 import { tasks as defaultTasks } from "./data/tasks.js";
 
 /**
@@ -40,6 +41,13 @@ const App = function () {
     return savedData ? JSON.parse(savedData) : {};
   });
 
+  // const addTask = () => {
+  //   const newTask = {
+  //     id: crypto.randomUUID(),
+  //     label: "Label"
+  //   }
+  // };
+
   const onChange = (event) => {
     const { name, value } = event.target;
     console.log(name, value);
@@ -56,6 +64,10 @@ const App = function () {
     updatedTasks.splice(sourceIndex, 1);
     updatedTasks.splice(targetIndex, 0, draggedTask);
     setTasksList(updatedTasks);
+  };
+
+  const onClick = () => {
+    console.log("clicking");
   };
 
   useEffect(() => {
@@ -86,6 +98,9 @@ const App = function () {
             onDrop={() => onDrop(index)}
           />
         ))}
+        <div onClick={onClick}>
+          <AddTaskItem />
+        </div>
       </ul>
     </main>
   );

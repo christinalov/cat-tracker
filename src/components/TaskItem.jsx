@@ -1,5 +1,6 @@
 import "./TaskItem.css";
 import { useRef } from "react";
+import { IoReorderFourOutline } from "react-icons/io5";
 
 const TaskItem = function ({
   label,
@@ -34,7 +35,7 @@ const TaskItem = function ({
         draggable={true}
         onDragStart={handleDragImage}
       >
-        ⋮⋮
+        <IoReorderFourOutline />
       </span>
 
       <label>{label}</label>
