@@ -1,7 +1,8 @@
 import { useState, useEffect, useRef } from "react";
-import TaskItem from "./components/TaskItem.jsx";
-import AddTaskItem from "./components/AddTaskItem.jsx";
 import { tasks as defaultTasks } from "./data/tasks.js";
+import TaskItem from "./components/TaskItem.jsx";
+import AddTaskItemButton from "./components/AddTaskItemButton.jsx";
+import AddTaskItemForm from "./components/AddTaskItemForm.jsx";
 
 /**
  * need to do:
@@ -12,10 +13,12 @@ import { tasks as defaultTasks } from "./data/tasks.js";
  * 5. import dates to google calendar
  * 6. combine taskList and taskdatedata into one single component?
  * 7. add drag and drop threshold lines
+ * 8. learn css/improve the ui
  **/
 
-const App = function () {
+const App = () => {
   const movingTaskItemSourceIndex = useRef(null);
+
   const [dateMsg] = useState(() => {
     const dayNames = [
       "Sunday",
@@ -26,10 +29,11 @@ const App = function () {
       "Friday",
       "Saturday",
     ];
-
     const d = new Date();
     return `Today is ${d.getMonth() + 1}/${d.getDate()}/${d.getFullYear()} (${dayNames[d.getDay()]}) !!`;
   });
+
+  const [showModal, setShowModal] = useState(false);
 
   const [tasksList, setTasksList] = useState(() => {
     const savedOrder = localStorage.getItem("tasksOrderData");
@@ -66,10 +70,6 @@ const App = function () {
     setTasksList(updatedTasks);
   };
 
-  const onClick = () => {
-    console.log("clicking");
-  };
-
   useEffect(() => {
     localStorage.setItem("tasksDateData", JSON.stringify(tasksData));
   }, [tasksData]);
@@ -98,10 +98,9 @@ const App = function () {
             onDrop={() => onDrop(index)}
           />
         ))}
-        <div onClick={onClick}>
-          <AddTaskItem />
-        </div>
+        <AddTaskItemButton onClick={() => setShowModal(true)} />
       </ul>
+      {showModal && <AddTaskItemForm onClose={() => setShowModal(false)} />}
     </main>
   );
 };

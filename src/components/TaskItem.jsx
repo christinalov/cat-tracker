@@ -2,7 +2,7 @@ import "./TaskItem.css";
 import { useRef } from "react";
 import { IoReorderFourOutline } from "react-icons/io5";
 
-const TaskItem = function ({
+const TaskItem = ({
   label,
   name,
   index,
@@ -14,7 +14,7 @@ const TaskItem = function ({
   numberValue,
   onDragStart,
   onDrop,
-}) {
+}) => {
   const liRef = useRef(null);
 
   const handleDragImage = (e) => {
