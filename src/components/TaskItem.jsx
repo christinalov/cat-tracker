@@ -3,15 +3,11 @@ import { useRef } from "react";
 import { IoReorderFourOutline } from "react-icons/io5";
 
 const TaskItem = ({
-  label,
   name,
   index,
-  value,
+  label,
+  task,
   onChange,
-  type,
-  numberNeeded,
-  numberName,
-  numberValue,
   onDragStart,
   onDrop,
 }) => {
@@ -26,9 +22,8 @@ const TaskItem = ({
     <li
       ref={liRef}
       className="task-item"
-      index={index}
       onDragOver={(e) => e.preventDefault()}
-      onDrop={onDrop}
+      onDrop={onDrop(index)}
     >
       <span
         className="drag-handle"
@@ -38,20 +33,16 @@ const TaskItem = ({
         <IoReorderFourOutline />
       </span>
 
-      <label>{label}</label>
+      <label>{task.label}</label>
 
-      {numberNeeded && (
+      {task.inputs.map((input) => (
         <input
-          type="number"
-          name={numberName}
-          value={numberValue}
-          onChange={onChange}
+          key={input.id}
+          type={input.type}
+          value={input.value || ""}
+          onChange={(e) => onChange(task.id, input.Id, e.target.value)}
         />
-      )}
-
-      {type === "date" && (
-        <input type="date" name={name} value={value} onChange={onChange} />
-      )}
+      ))}
     </li>
   );
 };

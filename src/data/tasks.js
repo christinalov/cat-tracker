@@ -33,16 +33,9 @@ export const tasks = [
   {
     label: "Weight",
     name: "weightDate",
-    type: "date",
-    value: null,
-    numberNeeded: true,
-    numberName: "weightDateNumber",
-    numberValue: null,
-  },
-  {
-    label: "Last Vet Visit",
-    name: "vetVisit",
-    type: "date",
-    numberNeeded: false,
+    inputs: [
+      { type: "date", value: null },
+      { type: "number", value: null },
+    ],
   },
 ];

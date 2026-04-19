@@ -35,72 +35,98 @@ const App = () => {
 
   const [showModal, setShowModal] = useState(false);
 
-  const [tasksList, setTasksList] = useState(() => {
-    const savedOrder = localStorage.getItem("tasksOrderData");
-    return savedOrder ? JSON.parse(savedOrder) : defaultTasks;
+  const [tasks, setTasks] = useState(() => {
+    const savedTasks = localStorage.getItem("tasks");
+    return savedTasks ? JSON.parse(savedTasks) : [];
   });
 
-  const [tasksData, setTasksData] = useState(() => {
-    const savedData = localStorage.getItem("tasksDateData");
-    return savedData ? JSON.parse(savedData) : {};
-  });
-
-  // const addTask = () => {
-  //   const newTask = {
-  //     id: crypto.randomUUID(),
-  //     label: "Label"
-  //   }
-  // };
-
-  const onChange = (event) => {
-    const { name, value } = event.target;
-    console.log(name, value);
-    setTasksData((prev) => ({
-      ...prev,
-      [name]: value,
-    }));
+  const onChange = (taskId, inputId, newValue) => {
+    setTasks((prev) =>
+      prev.map((task) =>
+        task.id === taskId
+          ? {
+              ...task,
+              inputs: task.inputs.map((input) =>
+                input.id === inputId ? { ...input, value: newValue } : input,
+              ),
+            }
+          : task,
+      ),
+    );
   };
 
   const onDrop = (targetIndex) => {
     const sourceIndex = movingTaskItemSourceIndex.current;
-    const updatedTasks = [...tasksList];
+    const updatedTasks = [...tasks];
     const draggedTask = updatedTasks[sourceIndex];
     updatedTasks.splice(sourceIndex, 1);
     updatedTasks.splice(targetIndex, 0, draggedTask);
-    setTasksList(updatedTasks);
+    setTasks(updatedTasks);
+  };
+
+  // Creating a new task item
+  const onSubmit = (formData) => {
+    console.log("tasks: ", tasks, Array.isArray(tasks));
+    /** formData: obj
+     *  {taskName: str,
+     *  dateNeeded: "on"
+     *  numberNeeded: null}
+     */
+    const newTask = {
+      id: crypto.randomUUID(),
+      label: formData["taskName"],
+      inputs: [],
+    };
+
+    if (formData["numberNeeded"]) {
+      newTask.inputs = [
+        ...newTask.inputs,
+        { id: crypto.randomUUID(), type: "number", value: null },
+      ];
+    }
+
+    if (formData["dateNeeded"]) {
+      console.log(newTask.inputs);
+      newTask.inputs = [
+        ...newTask.inputs,
+        { id: crypto.randomUUID(), type: "date", value: null },
+      ];
+    }
+
+    setTasks((prev) => [...prev, newTask]);
   };
 
   useEffect(() => {
-    localStorage.setItem("tasksDateData", JSON.stringify(tasksData));
-  }, [tasksData]);
-
-  useEffect(() => {
-    localStorage.setItem("tasksOrderData", JSON.stringify(tasksList));
-  }, [tasksList]);
+    localStorage.setItem("tasks", JSON.stringify(tasks));
+  }, [tasks]);
 
   return (
     <main>
       <p>{dateMsg}</p>
       <ul>
-        {tasksList.map((task, index) => (
+        {tasks.map((task, index) => (
           <TaskItem
-            key={task.name}
+            key={task.id}
             name={task.name}
             index={index}
+            task={task}
             label={task.label}
-            type={task.type}
-            value={tasksData[task.name]}
             onChange={onChange}
-            numberNeeded={task.numberNeeded}
-            numberName={task.numberName}
-            numberValue={task.numberNeeded ? tasksData[task.numberName] : ""}
             onDragStart={() => (movingTaskItemSourceIndex.current = index)}
-            onDrop={() => onDrop(index)}
+            onDrop={() => onDrop}
           />
         ))}
-        <AddTaskItemButton onClick={() => setShowModal(true)} />
+        <AddTaskItemButton
+          disabled={showModal}
+          onClick={() => setShowModal(true)}
+        />
       </ul>
-      {showModal && <AddTaskItemForm onClose={() => setShowModal(false)} />}
+      {showModal && (
+        <AddTaskItemForm
+          onClose={() => setShowModal(false)}
+          onSubmit={onSubmit}
+        />
+      )}
     </main>
   );
 };
