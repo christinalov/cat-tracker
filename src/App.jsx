@@ -1,5 +1,4 @@
 import { useState, useEffect, useRef } from "react";
-import { tasks as defaultTasks } from "./data/tasks.js";
 import TaskItem from "./components/TaskItem.jsx";
 import AddTaskItemButton from "./components/AddTaskItemButton.jsx";
 import AddTaskItemForm from "./components/AddTaskItemForm.jsx";
@@ -30,7 +29,7 @@ const App = () => {
       "Saturday",
     ];
     const d = new Date();
-    return `Today is ${d.getMonth() + 1}/${d.getDate()}/${d.getFullYear()} (${dayNames[d.getDay()]}) !!`;
+    return `Today's date: ${d.getMonth() + 1}/${d.getDate()}/${d.getFullYear()} (${dayNames[d.getDay()]})`;
   });
 
   const [showModal, setShowModal] = useState(false);
@@ -41,6 +40,7 @@ const App = () => {
   });
 
   const onChange = (taskId, inputId, newValue) => {
+    console.log("typing: ", newValue);
     setTasks((prev) =>
       prev.map((task) =>
         task.id === taskId
@@ -113,7 +113,7 @@ const App = () => {
             label={task.label}
             onChange={onChange}
             onDragStart={() => (movingTaskItemSourceIndex.current = index)}
-            onDrop={() => onDrop}
+            onDrop={() => onDrop(index)}
           />
         ))}
         <AddTaskItemButton
