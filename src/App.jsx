@@ -8,7 +8,7 @@ import AddTaskItemForm from "./components/AddTaskItemForm.jsx";
  * 1. hover over LI taskitem, tooltip displays how many days ago from today
  * 2. feature to add new taskitem AND to delete taskitem
  * 3. done : rearrange order LI taskitems and have order persist
- * 4. feature to remove all saved dates?
+ * 4. draggable lines for better UX
  * 5. import dates to google calendar
  * 6. combine taskList and taskdatedata into one single component?
  * 7. add drag and drop threshold lines
@@ -40,7 +40,6 @@ const App = () => {
   });
 
   const onChange = (taskId, inputId, newValue) => {
-    console.log("typing: ", newValue);
     setTasks((prev) =>
       prev.map((task) =>
         task.id === taskId
@@ -96,6 +95,15 @@ const App = () => {
     setTasks((prev) => [...prev, newTask]);
   };
 
+  // Deleting task item
+  const onDelete = (taskId) => {
+    console.log("deleting");
+    setTasks((prev) => 
+      prev.filter((task) => task.id !== taskId)
+    );
+    console.log(tasks);
+  };
+
   useEffect(() => {
     localStorage.setItem("tasks", JSON.stringify(tasks));
   }, [tasks]);
@@ -114,6 +122,7 @@ const App = () => {
             onChange={onChange}
             onDragStart={() => (movingTaskItemSourceIndex.current = index)}
             onDrop={() => onDrop(index)}
+            onDelete={onDelete}
           />
         ))}
         <AddTaskItemButton

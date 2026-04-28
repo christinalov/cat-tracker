@@ -11,6 +11,7 @@ const TaskItem = ({
   onChange,
   onDragStart,
   onDrop,
+  onDelete,
 }) => {
   const liRef = useRef(null);
 
@@ -47,7 +48,7 @@ const TaskItem = ({
         ))}
       </div>
 
-      <button className="delete-icon">
+      <button className="delete-icon" onClick={() => onDelete(task.id)}>
         <MdDeleteOutline />
       </button>
     </li>
