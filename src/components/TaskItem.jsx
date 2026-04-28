@@ -37,15 +37,16 @@ const TaskItem = ({
 
       <div className="content">
         <label>{task.label}</label>
-
+        <div className="inputs">
         {task.inputs.map((input) => (
           <input
-            key={input.id}
-            type={input.type}
-            value={input.value || ""}
-            onChange={(e) => onChange(task.id, input.id, e.target.value)}
+          key={input.id}
+          type={input.type}
+          value={input.value || ""}
+          onChange={(e) => onChange(task.id, input.id, e.target.value)}
           />
         ))}
+        </div>
       </div>
 
       <button className="delete-icon" onClick={() => onDelete(task.id)}>

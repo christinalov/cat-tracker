@@ -20,12 +20,15 @@ const AddTaskItemForm = ({ onClose, onSubmit }) => {
   return (
     <div className="modal">
       <form action={handleSubmit}>
+        <div className="content">
+
         <input
           name="taskName"
           placeholder="Task name"
           value={label}
           onChange={(e) => setLabel(e.target.value)}
         />
+        <div className="inputs">
 
         <label>
           <input
@@ -33,7 +36,7 @@ const AddTaskItemForm = ({ onClose, onSubmit }) => {
             type="checkbox"
             checked={dateNeeded}
             onChange={(e) => setDateNeeded(e.target.checked)}
-          />
+            />
           Date?
         </label>
 
@@ -43,11 +46,13 @@ const AddTaskItemForm = ({ onClose, onSubmit }) => {
             type="checkbox"
             checked={numberNeeded}
             onChange={(e) => setNumberNeeded(e.target.checked)}
-          />
+            />
           Number?
         </label>
+            </div>
 
         <button type="submit">Create</button>
+            </div>
       </form>
 
       <button onClick={onClose}> Close </button>

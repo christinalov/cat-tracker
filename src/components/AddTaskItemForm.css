@@ -1,5 +1,17 @@
 .modal {
-  display: flex;
+  display: grid;
+  grid-template-columns: 32px 1fr auto; 
+  align-items: center;
+  gap: 12px;
+
+  /* min-height: 30px;
+
+  margin: 10px 0;
+  padding: 12px 14px;
+  border-radius: 10px; */
+  background-color: #fafafa;
+
+  transition: all 0.2s ease;
 }
 
 form {

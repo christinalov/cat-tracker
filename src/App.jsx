@@ -6,11 +6,10 @@ import AddTaskItemForm from "./components/AddTaskItemForm.jsx";
 /**
  * need to do:
  * 1. hover over LI taskitem, tooltip displays how many days ago from today
- * 2. feature to add new taskitem AND to delete taskitem
+ * 2. done: feature to add new taskitem AND to delete taskitem
  * 3. done : rearrange order LI taskitems and have order persist
- * 4. draggable lines for better UX
  * 5. import dates to google calendar
- * 6. combine taskList and taskdatedata into one single component?
+ * 6. done : combine taskList and taskdatedata into one single component?
  * 7. add drag and drop threshold lines
  * 8. learn css/improve the ui
  **/
