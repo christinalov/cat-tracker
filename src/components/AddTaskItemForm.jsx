@@ -1,4 +1,5 @@
 import "./AddTaskItemForm.css";
+import { IoIosClose } from "react-icons/io";
 import { useState } from "react";
 
 const AddTaskItemForm = ({ onClose, onSubmit }) => {
@@ -19,43 +20,46 @@ const AddTaskItemForm = ({ onClose, onSubmit }) => {
 
   return (
     <div className="modal">
+      <button className="close-button" onClick={onClose}>
+        <IoIosClose />
+      </button>
+
       <form action={handleSubmit}>
-        <div className="content">
-
-        <input
-          name="taskName"
-          placeholder="Task name"
-          value={label}
-          onChange={(e) => setLabel(e.target.value)}
-        />
-        <div className="inputs">
-
-        <label>
+        <div className="modal-content">
           <input
-            name="dateNeeded"
-            type="checkbox"
-            checked={dateNeeded}
-            onChange={(e) => setDateNeeded(e.target.checked)}
-            />
-          Date?
-        </label>
+            name="taskName"
+            placeholder="Task name"
+            value={label}
+            onChange={(e) => setLabel(e.target.value)}
+          />
 
-        <label>
-          <input
-            name="numberNeeded"
-            type="checkbox"
-            checked={numberNeeded}
-            onChange={(e) => setNumberNeeded(e.target.checked)}
-            />
-          Number?
-        </label>
-            </div>
+          <div className="task-types">
+            <label>
+              <input
+                name="dateNeeded"
+                type="checkbox"
+                checked={dateNeeded}
+                onChange={(e) => setDateNeeded(e.target.checked)}
+              />
+              Date?
+            </label>
 
-        <button type="submit">Create</button>
-            </div>
+            <label>
+              <input
+                name="numberNeeded"
+                type="checkbox"
+                checked={numberNeeded}
+                onChange={(e) => setNumberNeeded(e.target.checked)}
+              />
+              Number?
+            </label>
+          </div>
+
+          <button type="submit" className="create-button">
+            Create
+          </button>
+        </div>
       </form>
-
-      <button onClick={onClose}> Close </button>
     </div>
   );
 };
