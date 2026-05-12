@@ -22,6 +22,7 @@ const TaskItem = ({
 
   return (
     <li
+      title="tooltip"
       ref={liRef}
       className="task-item"
       onDragOver={(e) => e.preventDefault()}
@@ -38,14 +39,14 @@ const TaskItem = ({
       <div className="content">
         <label>{task.label}</label>
         <div className="inputs">
-        {task.inputs.map((input) => (
-          <input
-          key={input.id}
-          type={input.type}
-          value={input.value || ""}
-          onChange={(e) => onChange(task.id, input.id, e.target.value)}
-          />
-        ))}
+          {task.inputs.map((input) => (
+            <input
+              key={input.id}
+              type={input.type}
+              value={input.value || ""}
+              onChange={(e) => onChange(task.id, input.id, e.target.value)}
+            />
+          ))}
         </div>
       </div>
 
